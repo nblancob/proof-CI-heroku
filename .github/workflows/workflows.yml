@@ -1,36 +1,29 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
+# The name of workflow
+name: Deploy to heroku
+# Run workflow on every push to master branch
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    branches: [master]
+# The workflow jobs.
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+    # Checkout the repository
+    - name: Checkout
+    - uses: actions/checkout@v2.2.0
+    # Heroku commands
+    - name: Build, Push and Realease a Docker container to Heroku.
+      uses: gonuit/heroku-docker-deploy@v1.3.3
+      with:
+        email: ${{ secrets.HEROKU_EMAIL }}
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+        # Dockerfile
+        dockerfile_directory: ./
+        # Dockerfile name
+        dockerfile_name: Dockerfile
+        # Aditional option of docker build command.
+        docker_options: "--no-cache"
+        # Select the process type for which you want the docker container to be uploaded.
+        process_type: web
