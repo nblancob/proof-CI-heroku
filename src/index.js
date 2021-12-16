@@ -12,7 +12,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 const connectDB = require("./database");
 const cors = require("cors");
 const corsOptions = {
-  origin: "http://localhost:3001",
+  origin: "http://localhost:3000",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204,
