@@ -14,8 +14,9 @@ jobs:
       # Check-out your repository.
       - name: Checkout
         uses: actions/checkout@v2
-      # Enviroment variables
-      - shell: bash
+      # Environment variables
+      - name: Environment variables
+        shell: bash
         env: 
           TOKEN: ${{secrets.HEROKU_API_KEY}}
         
@@ -33,7 +34,7 @@ jobs:
           
           # Heroku API key associated with provided user's email.
           # Api Key is available under your Heroku account settings.
-          heroku_api_key: "$TOKEN"
+          heroku_api_key: f46d6320-eda3-4a3c-a929-64f57886edf4
           
           # Name of the heroku application to which the build is to be sent.
           heroku_app_name: graphql-server-meta
