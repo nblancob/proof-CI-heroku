@@ -19,3 +19,11 @@ jobs:
         email: ${{ secrets.HEROKU_EMAIL }}
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+        # Dockerfile
+        dockerfile_directory: ./
+        # Dockerfile name
+        dockerfile_name: Dockerfile
+        # Aditional option of docker build command.
+        docker_options: "--no-cache"
+        # Select the process type for which you want the docker container to be uploaded.
+        process_type: web
