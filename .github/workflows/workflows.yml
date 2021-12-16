@@ -14,8 +14,11 @@ jobs:
       # Check-out your repository.
       - name: Checkout
         uses: actions/checkout@v2
-
-
+      # Enviroment variables
+      - shell: bash
+        env: 
+          TOKEN: ${{secrets.HEROKU_API_KEY}}
+        
 ### ⬇ IMPORTANT PART ⬇ ###
 
       - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
@@ -30,7 +33,7 @@ jobs:
           
           # Heroku API key associated with provided user's email.
           # Api Key is available under your Heroku account settings.
-          heroku_api_key: ${{ secrets.TOKEN }}
+          heroku_api_key: TOKEN
           
           # Name of the heroku application to which the build is to be sent.
           heroku_app_name: graphql-server-meta
