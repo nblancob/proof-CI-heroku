@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
-const { DB_URL } = process.env;
-const { DB_NAME } = process.env;
+const { DB_URL } = "mongodb+srv://student_00:estudiante2021@sandbox.m6mtx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const { DB_NAME } = meta;
 //Database
 let connection;
 async function connectDB() {
