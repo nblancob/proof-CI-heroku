@@ -1,2 +1,2 @@
 # meta
-Meta is a repository to developt the MisionTIC 4th cicle project
+Meta is a repository to developt the MisionTIC 4th cicle project and is a bool.
