@@ -1,0 +1,147 @@
+scalar Date
+
+type Project {
+  _id: ID!
+  name: String!
+  state: Boolean!
+  description: String
+  phase: String
+  mandated: String
+  budget: Int
+  general_obj: String
+  specific_obj: String
+  star_date: Date!
+  end_date: Date!
+  advances: String
+}
+type ApplicationType{
+  _id: ID!
+  name:String
+  applied_project: ID
+  aplication_state: String
+}
+type User{
+  _id: ID!
+  name: String!
+  rol: String
+  email: String
+  password: String
+  authorization:Boolean
+  active_project: [ID]
+  application:ApplicationType
+}
+input authentication {
+  email:String!
+  password:String!
+}
+type Advance {
+  _id: ID!
+  observations: String!
+  description: String!
+}
+type Query {
+  "Devuelve todos los cursos"
+  getProjects: [Project]
+  "Devuelve un proyecto segun el ID"
+  getProjectByID(id: ID!): Project
+  "Devuelve todos los proyectos activos"
+  getActiveProjects: [Project]
+  "Devuelve todos los avances"
+  getAdvances: [Advance]
+  "Devuelve la lista de usuarios registrados"
+  getUsers:[User]
+  "Devuelve todos los estudiantes (autorizados y no autorizados)"
+  getStudents:[User]
+  "Enlista los proyectos que lidera determinado lider"
+  getLeaderProject(mandated: String!): Project
+  "Autenticacion del usuario"
+  authUser(input:authentication!): Boolean
+  "Devuelve la lista de solicitudes de estudiantes pendientes de aceptar o rechazar para un lider "
+  getApplicationList(mandated:String!):[User]
+}
+
+input Advanceinput {
+  observations: String!
+  description: String!
+}
+
+input ProjectAdvanceEdit {
+  advances: ID!
+}
+
+input AcceptUserInput{
+  authorization: Boolean!
+}
+input editStateProjectinput{
+  state: Boolean!
+}
+input editStateStudentinput{
+  authorization: Boolean!
+}
+input PhaseInput{
+  phase:String
+}
+input createProjectinput{
+  name: String!
+  state: Boolean!
+  description: String
+  phase: String
+  mandated: String
+  budget: Int
+  general_obj: String
+  specific_obj: String
+  star_date: Date!
+  end_date: Date!
+  advances: String
+}
+input editProject{
+  name: String
+  budget: Int
+  general_obj: String
+  specific_obj: String
+}
+input ApplicationInput{
+  _id: ID!
+  name:String
+  applied_project: ID
+  aplication_state: String
+}
+input UserInput{
+  name: String
+  rol: String
+  email: String
+  password: String
+  authorization:Boolean
+  active_project: [ID]
+  application:ApplicationInput
+
+}
+
+
+type Mutation {
+  "Crea un avance"
+  createAdvance(input: Advanceinput!): Advance
+  "Agrega un avance a un proyecto existente"
+  addAdvance(id: ID!, input: ProjectAdvanceEdit!): Project
+  "Editar un avance"
+  editAdvance(id: ID!, input: Advanceinput!): Advance
+  "aceptar usuarios registrados"
+  acceptUser(id:ID!, input:AcceptUserInput!): User
+  "aprobar proyecto (cambiar su estado)"
+  editStateProject(id: ID!, input:editStateProjectinput!): Project
+  "Cambiar el estado de un proyecto"
+  changePhaseProject(id:ID!, input:PhaseInput):Project
+  "Cambiar el estado de un estudiante"
+  editStateStudent(rol:String, id:ID!, input:editStateStudentinput!): User
+  "Liderar un nuevo proyecto"
+  createProject(input:createProjectinput!): Project
+  "Editar la información relacionada al proyecto unicamente nombre, presupuesto y objetivos generales y especificos"
+  editProject(mandated: String, input:editProject!):Project
+  "Registrar del usuario en la plataforma"
+  regUser(input:UserInput!):User
+  "Actualiza los datos del usuario (correo, contraseña y nombre)"
+  updateUser(id: ID!,input:UserInput):User
+  "Acepta o rechaza solicitudes de inscripcion a un proyecto"
+  acceptStudentApplication(id:ID!,input:Boolean!):User
+
+}
