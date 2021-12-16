@@ -14,11 +14,6 @@ jobs:
       # Check-out your repository.
       - name: Checkout
         uses: actions/checkout@v2
-      # Environment variables
-      - name: Environment variables
-        shell: bash
-        env: 
-          TOKEN: ${{secrets.HEROKU_API_KEY}}
         
 ### ⬇ IMPORTANT PART ⬇ ###
 
