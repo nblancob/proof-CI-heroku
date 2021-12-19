@@ -10,7 +10,7 @@ type Project {
   budget: Int
   general_obj: String
   specific_obj: String
-  star_date: Date!
+  start_date: Date!
   end_date: Date!
   advances: String
 }
